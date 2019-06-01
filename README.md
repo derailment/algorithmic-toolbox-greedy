@@ -1,5 +1,5 @@
 # Algorithmic Toolbox
-Solutions of greedy algorithm assignment on [Algorithmic Toolbox](https://www.coursera.org/learn/algorithmic-toolbox)
+Solutions of greedy algorithm assignments on [Algorithmic Toolbox](https://www.coursera.org/learn/algorithmic-toolbox)
 
 ## Main ingredients of Greedy Algorithm:
 1. Make a greedy choice
