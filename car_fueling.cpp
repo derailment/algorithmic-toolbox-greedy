@@ -6,11 +6,33 @@ using std::cout;
 using std::vector;
 using std::max;
 
-int compute_min_refills(int dist, int tank, vector<int> & stops) {
-    // write your code here
-    return -1;
+int min_refills(int dist, int tank, vector<int> & stops, int start, int count) {
+    if ((start + tank) >= dist) {
+        return count;
+    }
+    if (stops.size() == 0) {
+        return -1;
+    }
+    int old_start = start;
+    for (int i = 0; i < stops.size(); i++) {
+        if (stops[i] <= (start + tank)) {
+            old_start = stops[i];
+        } else {
+            if (i != 0) {
+                stops.erase(stops.begin(), stops.begin() + i);
+            }
+            else {
+                stops.erase(stops.begin());
+            }
+            return min_refills(dist, tank, stops, old_start, count+1);
+        }
+    }
+    return (old_start + tank) >= dist ? count+1 : -1;
 }
 
+int compute_min_refills(int dist, int tank, vector<int> & stops) {
+    return min_refills(dist, tank, stops, 0, 0);
+}
 
 int main() {
     int d = 0;
