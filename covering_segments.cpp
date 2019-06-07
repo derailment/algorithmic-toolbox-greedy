@@ -9,12 +9,40 @@ struct Segment {
   int start, end;
 };
 
+bool comp(Segment a, Segment b) {
+  if (a.end < b.end) {
+    return true;
+  } 
+  return false;
+}
+
 vector<int> optimal_points(vector<Segment> &segments) {
   vector<int> points;
-  //write your code here
-  for (size_t i = 0; i < segments.size(); ++i) {
-    points.push_back(segments[i].start);
-    points.push_back(segments[i].end);
+  vector<int> results;
+  std::sort(segments.begin(), segments.end(), comp);
+  while(segments.size() != 0) {
+    int minEnd = segments[0].end;
+    if (segments.size() == 1) {
+      results.push_back(minEnd);
+      segments.erase(segments.begin());
+      break;
+    }
+    for (int i = 0; i < segments.size(); i++) {
+      if (i == (segments.size() - 1) && segments[i].start <= minEnd) {
+        results.push_back(minEnd);
+        segments.erase(segments.begin(), segments.begin() + segments.size());
+        break;
+      } else if (segments[i].start <= minEnd) {
+        continue;
+      } else {
+        results.push_back(minEnd);
+        segments.erase(segments.begin(), segments.begin() + i);
+        break;
+      }
+    }
+  }
+  for (size_t i = 0; i < results.size(); ++i) {
+    points.push_back(results[i]);
   }
   return points;
 }
