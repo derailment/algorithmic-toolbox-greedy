@@ -5,7 +5,19 @@ using std::vector;
 
 vector<int> optimal_summands(int n) {
   vector<int> summands;
-  //write your code here
+  int res = n;
+  for(int i=1; i<=n; i++) {
+    int tryRes = res - i;
+    if (tryRes == 0) {
+      summands.push_back(i);
+      break;
+    } else {
+      if (tryRes - (i + 1) >= 0) {
+        summands.push_back(i);
+        res = tryRes;
+      } 
+    }
+  }
   return summands;
 }
 
